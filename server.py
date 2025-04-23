@@ -63,3 +63,6 @@ if __name__ == "__main__":
             print(f"Error with client {addr}: {e}")
         finally:
             print(f"Connection from {addr} closed")
+
+            def process_request(self, request):
+                
