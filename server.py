@@ -34,3 +34,15 @@ class TupleSpaceServer:
                         client_thread.start()
             except Exception as e:
                 print(f"Server error: {e}")
+
+
+if __name__ == "__main__":
+    import sys
+
+    if len(sys.argv) != 2:
+        print("Usage: python server.py <port>")
+        sys.exit(1)
+
+    port = int(sys.argv[1])
+    server = TupleSpaceServer(port)
+    server.start()
