@@ -65,4 +65,30 @@ if __name__ == "__main__":
             print(f"Connection from {addr} closed")
 
             def process_request(self, request):
-                
+                self.stats['total_ops'] += 1
+                self.print_stats_if_needed()
+
+                try:
+                    parts = request.split()
+                    if len(parts) < 3:
+                        return self.format_error("Invalid request format")
+
+                    size = int(parts[0])
+                    op = parts[1].upper()
+                    key = parts[2]
+
+                    if op == 'R':  # READ operation
+                        return self.handle_read(key)
+                    elif op == 'G':  # GET operation
+                        return self.handle_get(key)
+                    elif op == 'P':  # PUT operation
+                        if len(parts) < 4:
+                            return self.format_error("PUT requires a value")
+                        value = ' '.join(parts[3:])
+                        return self.handle_put(key, value)
+                    else:
+                        return self.format_error("Unknown operation")
+
+                except Exception as e:
+                    self.stats['errors'] += 1
+                    return self.format_error(str(e))
