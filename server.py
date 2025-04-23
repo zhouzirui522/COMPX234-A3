@@ -46,3 +46,20 @@ if __name__ == "__main__":
     port = int(sys.argv[1])
     server = TupleSpaceServer(port)
     server.start()
+
+
+    def handle_client(self, conn, addr):
+        print(f"New connection from {addr}")
+        try:
+            with conn:
+                while True:
+                    data = conn.recv(1024).decode()
+                    if not data:
+                        break
+
+                    response = self.process_request(data)
+                    conn.sendall(response.encode())
+        except Exception as e:
+            print(f"Error with client {addr}: {e}")
+        finally:
+            print(f"Connection from {addr} closed")
