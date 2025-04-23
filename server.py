@@ -92,3 +92,14 @@ if __name__ == "__main__":
                 except Exception as e:
                     self.stats['errors'] += 1
                     return self.format_error(str(e))
+
+    def handle_read(self, key):
+        self.stats['reads'] += 1
+        with self.lock:
+            if key in self.tuple_space:
+                value = self.tuple_space[key]
+                return self.format_ok_read(key, value)
+            else:
+                self.stats['errors'] += 1
+                return self.format_error(f"{key} does not exist")
+
