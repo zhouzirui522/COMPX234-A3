@@ -103,3 +103,14 @@ if __name__ == "__main__":
                 self.stats['errors'] += 1
                 return self.format_error(f"{key} does not exist")
 
+
+    def handle_get(self, key):
+        self.stats['gets'] += 1
+        with self.lock:
+            if key in self.tuple_space:
+                value = self.tuple_space.pop(key)
+                return self.format_ok_removed(key, value)
+            else:
+                self.stats['errors'] += 1
+                return self.format_error(f"{key} does not exist")
+
