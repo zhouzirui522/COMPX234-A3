@@ -114,3 +114,18 @@ if __name__ == "__main__":
                 self.stats['errors'] += 1
                 return self.format_error(f"{key} does not exist")
 
+
+    def handle_put(self, key, value):
+        self.stats['puts'] += 1
+        if len(key) + len(value) > 970:
+            self.stats['errors'] += 1
+            return self.format_error("Key-value pair too long")
+
+        with self.lock:
+            if key in self.tuple_space:
+                self.stats['errors'] += 1
+                return self.format_error(f"{key} already exists")
+            else:
+                self.tuple_space[key] = value
+                return self.format_ok_added(key, value)
+
