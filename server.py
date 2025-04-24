@@ -157,6 +157,22 @@ if __name__ == "__main__":
 
 
     def print_stats(self):
+        total_tuples = len(self.tuple_space)
+        avg_key_size = sum(len(k) for k in self.tuple_space) / total_tuples if total_tuples > 0 else 0
+        avg_value_size = sum(len(v) for v in self.tuple_space.values()) / total_tuples if total_tuples > 0 else 0
+        avg_tuple_size = avg_key_size + avg_value_size
+
+        print("\n=== Server Statistics ===")
+        print(f"Tuples: {total_tuples}")
+        print(f"Avg tuple size: {avg_tuple_size:.2f} chars")
+        print(f"Avg key size: {avg_key_size:.2f} chars")
+        print(f"Avg value size: {avg_value_size:.2f} chars")
+        print(f"Total clients: {self.stats['total_clients']}")
+        print(f"Total operations: {self.stats['total_ops']}")
+        print(f"READs: {self.stats['reads']}")
+        print(f"GETs: {self.stats['gets']}")
+        print(f"PUTs: {self.stats['puts']}")
+        print(f"Errors: {self.stats['errors']}\n")
 
 
 
