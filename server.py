@@ -144,4 +144,9 @@ if __name__ == "__main__":
         return f"{len(response):03d} {response}"
 
 
+    def format_error(self, message):
+        response = f"ERR {message}"
+        return f"{len(response):03d} {response}"
+
+
 
