@@ -134,3 +134,8 @@ if __name__ == "__main__":
         return f"{len(response):03d} {response}"
 
 
+    def format_ok_removed(self, key, value):
+        response = f"OK ({key}, {value}) removed"
+        return f"{len(response):03d} {response}"
+
+
