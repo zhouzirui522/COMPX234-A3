@@ -26,3 +26,27 @@ class TupleSpaceClient:
 
         except Exception as e:
             print(f"Client error: {e}")
+
+    def create_request(self, line):
+        parts = line.split()
+        if len(parts) < 2:
+            print(f"Invalid operation: {line}")
+            return None
+
+        op = parts[0].upper()
+        key = parts[1]
+
+        if op == 'PUT':
+            if len(parts) < 3:
+                print(f"PUT requires a value: {line}")
+                return None
+            value = ' '.join(parts[2:])
+            if len(key) + len(value) > 970:
+                print(f"Key-value pair too long: {line}")
+                return None
+            request = f"P {key} {value}"
+        elif op in ['READ', 'GET']:
+            request = f"{op[0]} {key}"
+        else:
+            print(f"Unknown operation: {op}")
+            return None
