@@ -149,4 +149,11 @@ if __name__ == "__main__":
         return f"{len(response):03d} {response}"
 
 
+    def print_stats_if_needed(self):
+        now = datetime.now()
+        if now - self.last_stats_time >= timedelta(seconds=10):
+            self.print_stats()
+            self.last_stats_time = now
+
+
 
