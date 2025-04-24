@@ -129,3 +129,8 @@ if __name__ == "__main__":
                 self.tuple_space[key] = value
                 return self.format_ok_added(key, value)
 
+    def format_ok_read(self, key, value):
+        response = f"OK ({key}, {value}) read"
+        return f"{len(response):03d} {response}"
+
+
