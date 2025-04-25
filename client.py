@@ -65,3 +65,5 @@ class TupleSpaceClient:
             response_size = int(response[:3])
             response_msg = response[4:]
 
+            print(f"{original_line}: {response_msg}")
+
