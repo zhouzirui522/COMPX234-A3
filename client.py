@@ -67,3 +67,19 @@ class TupleSpaceClient:
 
             print(f"{original_line}: {response_msg}")
 
+        except Exception as e:
+            print(f"Error processing {original_line}: {e}")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 4:
+        print("Usage: python client.py <host> <port> <request_file>")
+        sys.exit(1)
+
+    host = sys.argv[1]
+    port = int(sys.argv[2])
+    file_path = sys.argv[3]
+
+    client = TupleSpaceClient(host, port, file_path)
+    client.run()
+
