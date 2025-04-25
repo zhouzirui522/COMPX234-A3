@@ -57,3 +57,8 @@ class TupleSpaceClient:
     def send_request(self, sock, request, original_line):
         try:
             sock.sendall(request.encode())
+            response = sock.recv(1024).decode()
+            if not response:
+               print(f"No response for: {original_line}")
+               return
+
