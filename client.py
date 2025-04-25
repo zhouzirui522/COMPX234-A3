@@ -53,3 +53,6 @@ class TupleSpaceClient:
 
         size = len(request) + 4  # 3 for NNN + 1 for space
         return f"{size:03d} {request}"
+
+    def send_request(self, sock, request, original_line):
+        
