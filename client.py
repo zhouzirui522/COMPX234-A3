@@ -55,4 +55,5 @@ class TupleSpaceClient:
         return f"{size:03d} {request}"
 
     def send_request(self, sock, request, original_line):
-        
+        try:
+            sock.sendall(request.encode())
